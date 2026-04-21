@@ -2,7 +2,7 @@ name: Build and Release libgit2 DLLs
 
 on:
   release:
-    types: [created]
+    types: [created, published, edited]
 
 jobs:
   build:
