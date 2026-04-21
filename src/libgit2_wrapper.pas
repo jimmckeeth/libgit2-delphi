@@ -1,4 +1,4 @@
-﻿unit libgit2_wrapper;
+unit libgit2_wrapper;
 
 interface
 
@@ -53,7 +53,7 @@ type
       payload: Pointer): Integer; cdecl;
 
     function SidebandProgressCallback(str: PAnsiChar;
-      len: Size_t;
+      len: Integer;
       payload: Pointer): Integer; cdecl;
 
   public
@@ -105,7 +105,7 @@ begin
 end;
 
 function Static_SidebandProgressCallback(str: PAnsiChar;
-  len: Size_t;
+  len: Integer;
   payload: Pointer): Integer; cdecl;
 begin
   Result := TLibGit2(payload).SidebandProgressCallback(str, len, payload);
@@ -258,7 +258,7 @@ begin
     );
 end;
 
-function TLibGit2.SidebandProgressCallback(str: PAnsiChar; len: Size_t; payload: Pointer): Integer; cdecl;
+function TLibGit2.SidebandProgressCallback(str: PAnsiChar; len: Integer; payload: Pointer): Integer; cdecl;
 begin
   Result := 0; // 0 = continue.
   if not (lgoVerboseGitProgress in FProps.Options) then

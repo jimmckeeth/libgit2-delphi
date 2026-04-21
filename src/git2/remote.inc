@@ -111,7 +111,7 @@ type
    * @param payload Payload provided by the caller
    * @return 0 on success, or an error
    *)
-  git_remote_ready_cb = function(remote: git_remote; direction: Integer; payload: Pointer): Integer; cdecl;
+  git_remote_ready_cb = function(remote: Pgit_remote; direction: Integer; payload: Pointer): Integer; cdecl;
 
   (**
    * The callback settings structure

@@ -5,7 +5,9 @@
 {$R *.res}
 
 uses
+  {$IFDEF FullFastMM4}
   FastMM4,
+  {$ENDIF}
   libgit2,
   System.SysUtils,
   System.IOUtils,

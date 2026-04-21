@@ -1,0 +1,48 @@
+name: Build and Release libgit2 DLLs
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build libgit2 DLLs
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Build Win32
+        run: |
+          mkdir -Force lib/libgit2/build32
+          cd lib/libgit2/build32
+          cmake .. -A Win32 -DBUILD_SHARED_LIBS=ON -DBUILD_TESTS=OFF -DBUILD_CLI=OFF
+          cmake --build . --config Release
+          
+      - name: Build Win64
+        run: |
+          mkdir -Force lib/libgit2/build64
+          cd lib/libgit2/build64
+          cmake .. -A x64 -DBUILD_SHARED_LIBS=ON -DBUILD_TESTS=OFF -DBUILD_CLI=OFF
+          cmake --build . --config Release
+
+      - name: Upload Win32 DLL to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: lib/libgit2/build32/Release/git2.dll
+          asset_name: git2-win32.dll
+          tag: ${{ github.ref }}
+          overwrite: true
+
+      - name: Upload Win64 DLL to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: lib/libgit2/build64/Release/git2.dll
+          asset_name: git2-win64.dll
+          tag: ${{ github.ref }}
+          overwrite: true
