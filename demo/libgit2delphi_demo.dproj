@@ -4,10 +4,10 @@
         <AppType>Console</AppType>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <FrameworkType>None</FrameworkType>
-        <MainSource>libgit2_demo.dpr</MainSource>
+        <MainSource>libgit2delphi_demo.dpr</MainSource>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <ProjectGuid>{D8CF2733-6610-4066-8CF0-6D490F0D6854}</ProjectGuid>
-        <ProjectName Condition="'$(ProjectName)'==''">libgit2_demo</ProjectName>
+        <ProjectName Condition="'$(ProjectName)'==''">libgit2delphi_demo</ProjectName>
         <ProjectVersion>20.4</ProjectVersion>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
@@ -47,11 +47,13 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <SanitizedProjectName>libgit2_demo</SanitizedProjectName>
+        <SanitizedProjectName>libgit2delphi_demo</SanitizedProjectName>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UnitSearchPath>..\src;..\src\git2;C:\src\4prax.git\backend\libraries\fastmm4;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <PreBuildEvent><![CDATA[if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"
+$(PreBuildEvent)]]></PreBuildEvent>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
@@ -62,16 +64,12 @@
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UsePackage>vclwinx;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;FireDACCommonODBC;FireDACCommonDriver;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;IndyIPClient;dbxcds;vcledge;bindcompvclwinx;bindcompfmx;inetdb;FireDACSqliteDriver;DbxClientDriver;soapmidas;vclactnband;fmxFireDAC;dbexpress;DBXMySQLDriver;VclSmp;inet;vcltouch;fmxase;dbrtl;Skia.Package.FMX;fmxdae;FireDACMSAccDriver;CustomIPTransport;vcldsnap;DBXInterBaseDriver;IndySystem;Skia.Package.VCL;vcldb;vclFireDAC;bindcomp;FireDACCommon;inetstn;IndyCore;RESTBackendComponents;bindcompdbx;rtl;FireDACMySQLDriver;FireDACADSDriver;RESTComponents;DBXSqliteDriver;vcl;IndyIPServer;dsnapxml;dsnapcon;adortl;vclimg;FireDACPgDriver;FireDAC;inetdbxpress;xmlrtl;tethering;bindcompvcl;dsnap;CloudService;fmxobj;bindcompvclsmp;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
         <Manifest_File>(None)</Manifest_File>
-        <PreBuildEvent><![CDATA[if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"
-$(PreBuildEvent)]]></PreBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
         <BT_BuildType>Debug</BT_BuildType>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <Manifest_File>(None)</Manifest_File>
-        <PreBuildEvent><![CDATA[if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"
-$(PreBuildEvent)]]></PreBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
@@ -87,12 +85,10 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <Debugger_RunParams>https://your-server/path/to/your/repo.git testuser APITOKEN c:\temp\FolderToUse</Debugger_RunParams>
-        <Manifest_File>(None)</Manifest_File>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
-        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_DebugInformation>0</DCC_DebugInformation>
@@ -123,7 +119,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">libgit2_demo.dpr</Source>
+                    <Source Name="MainSource">libgit2delphi_demo.dpr</Source>
                 </Source>
                 <Excluded_Packages/>
             </Delphi.Personality>
@@ -145,7 +141,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"</PreBuildEvent>
+        <PreBuildEvent>if not exist &quot;$(OUTPUTDIR)git2.dll&quot; copy &quot;..\lib\redist\$(Platform)\git2.dll&quot; &quot;$(OUTPUTDIR)&quot;</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
@@ -153,7 +149,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
-        <PreBuildEvent>if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"</PreBuildEvent>
+        <PreBuildEvent>if not exist &quot;$(OUTPUTDIR)git2.dll&quot; copy &quot;..\lib\redist\$(Platform)\git2.dll&quot; &quot;$(OUTPUTDIR)&quot;</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
@@ -161,7 +157,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"</PreBuildEvent>
+        <PreBuildEvent>if not exist &quot;$(OUTPUTDIR)git2.dll&quot; copy &quot;..\lib\redist\$(Platform)\git2.dll&quot; &quot;$(OUTPUTDIR)&quot;</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
@@ -169,7 +165,7 @@ $(PreBuildEvent)]]></PreBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
-        <PreBuildEvent>if not exist "$(OUTPUTDIR)git2.dll" copy "..\lib\redist\$(Platform)\git2.dll" "$(OUTPUTDIR)"</PreBuildEvent>
+        <PreBuildEvent>if not exist &quot;$(OUTPUTDIR)git2.dll&quot; copy &quot;..\lib\redist\$(Platform)\git2.dll&quot; &quot;$(OUTPUTDIR)&quot;</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>

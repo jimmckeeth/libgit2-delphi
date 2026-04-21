@@ -1,4 +1,4 @@
-﻿program libgit2_demo;
+﻿program libgit2delphi_demo;
 
 {$APPTYPE CONSOLE}
 
