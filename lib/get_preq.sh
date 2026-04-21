@@ -12,7 +12,10 @@ if command -v apt-get >/dev/null; then
         gcc-mingw-w64 \
         g++-mingw-w64 \
         binutils-mingw-w64 \
-        pkg-config
+        pkg-config \
+        zlib1g-dev \
+        libpcre2-dev \
+        libkrb5-dev
 else
     echo "Error: apt-get not found. Please manually install: build-essential, cmake, gcc-mingw-w64, g++-mingw-w64, and pkg-config."
     exit 1

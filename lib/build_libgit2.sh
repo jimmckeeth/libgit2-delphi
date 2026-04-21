@@ -27,8 +27,11 @@ copy_dlls() {
 }
 
 # Common CMake flags for Windows cross-compilation
-# We use WinHTTP and SChannel to avoid OpenSSL dependencies on Windows
-COMMON_FLAGS="-DBUILD_SHARED_LIBS=ON -DBUILD_TESTS=OFF -DBUILD_CLI=OFF -DUSE_HTTPS=WinHTTP -DUSE_SHA1=CollisionDetection"
+# - WinHTTP/SChannel: avoids OpenSSL dependency on Windows
+# - REGEX_BACKEND=builtin: avoids PCRE dependency (tests are off anyway)
+# - USE_GSSAPI=OFF: disables Kerberos (not needed for Windows git operations)
+# - USE_BUNDLED_ZLIB=ON: use bundled zlib (cross-compiled mingw zlib not in apt)
+COMMON_FLAGS="-DBUILD_SHARED_LIBS=ON -DBUILD_TESTS=OFF -DBUILD_CLI=OFF -DUSE_HTTPS=WinHTTP -DUSE_SHA1=CollisionDetection -DREGEX_BACKEND=builtin -DUSE_GSSAPI=OFF -DUSE_BUNDLED_ZLIB=ON"
 
 echo "Building Win32 (x86) version of libgit2..."
 mkdir -p lib/libgit2/build32
